@@ -1,0 +1,120 @@
+package com.example.review;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+import com.example.review.databinding.ActivityMainBinding;
+
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+//    TextView text1, text2;
+//    CheckBox chkAgree;
+//    RadioGroup Rgroup1;
+//    RadioButton rdoDog,rdoCat,rdoRabbit;
+//    Button btnOK;
+//    ImageView imgPet;
+
+    ActivityMainBinding binding;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+
+//        text1 = findViewById(R.id.text1);
+//        chkAgree = findViewById(R.id.ChkAgree);
+//        text2 = findViewById(R.id.text2);
+//        Rgroup1 = findViewById(R.id.Rgroup1);
+//        rdoDog = findViewById(R.id.RdoDog);
+//        rdoCat = findViewById(R.id.RdoCat);
+//        rdoRabbit = findViewById(R.id.RdoRabbit);
+//        btnOK = findViewById(R.id.BtnOK);
+//        imgPet = findViewById(R.id.ImgPet);
+
+
+        binding.chkAgree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (binding.chkAgree.isChecked() == true) {
+                    binding.text2.setVisibility(View.VISIBLE);
+                    binding.Rgroup1.setVisibility(View.VISIBLE);
+                    binding.btnEND.setVisibility(View.VISIBLE);
+                    binding.Restart.setVisibility(View.VISIBLE);
+                    binding.imgPet.setVisibility(View.VISIBLE);
+                } else {
+                    binding.text2.setVisibility(View.INVISIBLE);
+                    binding.Rgroup1.setVisibility(View.INVISIBLE);
+                    binding.btnEND.setVisibility(View.INVISIBLE);
+                    binding.Restart.setVisibility(View.INVISIBLE);
+                    binding.imgPet.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+//        binding.Rgroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                if (checkedId == R.id.RdoDog) {
+//                    binding.imgPet.setImageResource(R.drawable.pikachu);
+//                } else if (checkedId == R.id.RdoCat) {
+//                    binding.imgPet.setImageResource(R.drawable.jammanbo);
+//                } else if (checkedId == R.id.RdoRabbit) {
+//                    binding.imgPet.setImageResource(R.drawable.fairy);
+//                } else {
+//                    Toast.makeText(MainActivity.this, "포켓몬을 먼저 선택하세요", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+//        binding.btnEND.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+
+
+        binding.RdoCat.setOnClickListener(this);
+        binding.RdoDog.setOnClickListener(this);
+        binding.RdoRabbit.setOnClickListener(this);
+        binding.btnEND.setOnClickListener(this);
+        binding.Restart.setOnClickListener(this);
+
+
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.RdoDog)
+            binding.imgPet.setImageResource(R.drawable.pikachu);
+        else if (view.getId() == R.id.RdoCat)
+            binding.imgPet.setImageResource(R.drawable.jammanbo);
+        else if (view.getId() == R.id.RdoRabbit)
+            binding.imgPet.setImageResource(R.drawable.fairy);
+        else if(view.getId()== R.id.Restart){
+            binding.chkAgree.setChecked(false);
+            binding.Rgroup1.clearCheck();
+            binding.imgPet.setImageResource(0);}
+        else if (view.getId()==R.id.btnEND)
+            finish();
+        else Toast.makeText(MainActivity.this, "포켓몬을 먼저 선택하세요", Toast.LENGTH_SHORT).show();
+    }
+
+}
